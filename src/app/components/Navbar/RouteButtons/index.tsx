@@ -23,7 +23,7 @@ const helpList = [
 
 export function RouteButtons() {
   return (
-    <div className="flex font-medium text-sm h-full">
+    <div className="flex font-medium text-sm h-full col-span-6 justify-center">
       <LinkButton title="Comprar" url="./buy" list={buyList} />
       <LinkButton title="Alugar" url="./rent" list={retList} />
       <LinkButton title="Ajuda" url="./rent" list={helpList} />
