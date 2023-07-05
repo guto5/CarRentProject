@@ -11,6 +11,5 @@ export function Navbar() {
         <Account />
       </div>
     </>
-
-  )
+  );
 }
