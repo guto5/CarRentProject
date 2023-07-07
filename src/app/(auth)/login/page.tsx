@@ -1,6 +1,7 @@
 "use client";
 import { Form, Input, Button } from "design-system-toshyro";
 import { BsCaretLeftFill } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 import Link from "next/link";
 import { loginWithGoogle } from "@/services/firebase/authentication";
@@ -31,7 +32,15 @@ export default function Login() {
         <p>Ainda não possui conta?</p>
         <Link href="./signin" className="text-blue-600 font-semibold">Criar Conta</Link>
       </div>
-      <button type="button" onClick={() => loginWithGoogle()}>Google</button>
+      <div className="col-span-12 w-full flex justify-around">
+        <button
+          type="button"
+          onClick={() => loginWithGoogle()}
+          className="border rounded-md p-2 hover:bg-gray-100"
+        >
+          <FcGoogle size={22} />
+        </button>
+      </div>
     </Form>
   )
 }
