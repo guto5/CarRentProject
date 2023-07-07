@@ -9,7 +9,8 @@ import { loginWithEmailAndPassword, loginWithGoogle } from "@/services/firebase/
 export default function Login() {
 
   async function handleSubmit(data: any) {
-    await loginWithEmailAndPassword(data.email, data.password)
+    const res = await loginWithEmailAndPassword(data.email, data.password)
+    console.log(res)
   }
 
   return (

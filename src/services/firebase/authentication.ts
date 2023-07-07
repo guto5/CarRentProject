@@ -27,9 +27,10 @@ const googleProvider = new GoogleAuthProvider();
 
 async function loginWithEmailAndPassword(email: string, password: string) {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    //
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    return { success: true, res: res }
+  } catch (error:any) {
+    return { success: false, message: error.message}
   }
 }
 
@@ -81,8 +82,9 @@ async function loginWithGoogle() {
         email: user.email,
       });
     }
-  } catch (error) {
-    //
+    return { success: true, res: res };
+  } catch (error:any) {
+    return { success: false, message: error.message}
   }
 }
 
