@@ -3,6 +3,7 @@ import { Form, Input, Button } from "design-system-toshyro";
 import { BsCaretLeftFill } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import Link from "next/link";
+import { loginWithGoogle } from "@/services/firebase/authentication";
 
 export default function Login() {
 
@@ -30,6 +31,7 @@ export default function Login() {
         <p>Ainda não possui conta?</p>
         <Link href="./signin" className="text-blue-600 font-semibold">Criar Conta</Link>
       </div>
+      <button type="button" onClick={() => loginWithGoogle()}>Google</button>
     </Form>
   )
 }
