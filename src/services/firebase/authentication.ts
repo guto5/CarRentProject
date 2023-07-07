@@ -1,4 +1,5 @@
 import { app } from "./firebase";
+import { toast } from "react-toastify";
 
 import {
   signInWithEmailAndPassword,
@@ -18,7 +19,6 @@ import {
   getDocs,
   where,
 } from "firebase/firestore";
-import { toast } from "react-toastify";
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -47,17 +47,18 @@ async function registerWithEmailAndPassword(
       authProvider: "local",
       email,
     });
-  } catch (error) {
-    //
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, message: error.message };
   }
 }
 
 async function recoverPassword(email: string) {
   try {
     await sendPasswordResetEmail(auth, email);
-    toast.info("Email para recuperação de senha enviado!");
-  } catch (error) {
-    //
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, message: error.message };
   }
 }
 
