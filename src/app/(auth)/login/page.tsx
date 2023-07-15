@@ -1,14 +1,16 @@
 "use client";
-import { Form, Input, Button } from "design-system-toshyro";
+import { Form, Input, Button, InputPass } from "design-system-toshyro";
 import { BsCaretLeftFill } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 import Link from "next/link";
+import { loginWithEmailAndPassword, loginWithGoogle } from "@/services/firebase/authentication";
 
 export default function Login() {
 
-  function handleSubmit(data: any) {
-    toast.info("Email: " + data.email);
-    toast.info("Senha: " + data.password);
+  async function handleSubmit(data: any) {
+    const res = await loginWithEmailAndPassword(data.email, data.password)
+    console.log(res)
   }
 
   return (
@@ -19,16 +21,25 @@ export default function Login() {
       </Link>
       <h1 className="font-bold text-3xl col-span-12 text-center">Faça o login</h1>
       <Input width="col-span-12" name="email" label="Email" />
-      <Input width="col-span-12" name="password" label="Senha" type="password" />
+      <InputPass width="col-span-12" name="password" label="Senha" />
       <div className="col-span-12 text-sm">
-        <Link href="./lost_pass" className="text-blue-600 font-semibold">Esqueceu a senha?</Link>
+        <Link href="./recover" className="text-red-600 font-semibold">Esqueceu a senha?</Link>
       </div>
       <div className="col-span-12 mt-5">
-        <Button title="Entrar" full onSubmit={handleSubmit} />
+        <Button title="Entrar" color="bg-red-500 border-red-600 hover:bg-red-600 focus:ring-red-600" full onSubmit={handleSubmit} />
       </div>
       <div className="col-span-12 flex gap-1 text-sm font-medium">
         <p>Ainda não possui conta?</p>
-        <Link href="./signin" className="text-blue-600 font-semibold">Criar Conta</Link>
+        <Link href="./register" className="text-red-600 font-semibold">Criar Conta</Link>
+      </div>
+      <div className="col-span-12 w-full flex justify-around">
+        <button
+          type="button"
+          onClick={() => loginWithGoogle()}
+          className="border rounded-md p-2 hover:bg-gray-100"
+        >
+          <FcGoogle size={22} />
+        </button>
       </div>
     </Form>
   )
